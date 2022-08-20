@@ -36,10 +36,18 @@ dependencies:
   cupertino_icons: ^1.0.2
   audioplayers: 0.19.1
   lottie: 
-  flutter_inset_box_shadow: 
-  video_player: ^2.4.4
   google_fonts: ^3.0.1
-  carousel_slider: ^4.1.1
+  confetti: ^0.6.0
+  carousel_slider: ^4.1.1 
+  cached_network_image: ^2.5.1
+  need_resume: ^1.0.6
+  flutter_spinkit: ^5.1.0
+  flutter_inset_box_shadow: ^1.0.8
+  get_it: ^7.2.0
+  rename: ^2.0.1
+  
+  
+  
 
 dev_dependencies:
   flutter_test:
@@ -65,43 +73,189 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/dog.png
-    - assets/elephant.png
-    - assets/balloon.gif
+    - assets/coww.gif
+    - assets/gui/vo.png
+    - assets/gui/play.png
+    - assets/gui/back.png
+    - assets/gui/homu.png
+    - assets/gui/gameCompleted.png
+    - assets/gui/gameCompleted2.png
+    - assets/gui/gameCompleted3.png
+    - assets/Ateacher.wav
+    - assets/Asoldier.wav
+    - assets/Aastronaut.wav
+    - assets/Adoctor.wav
+    - assets/Afarmer.wav
+    - assets/Afire.wav
+    - assets/Apilot.wav
+    - assets/Apolice.wav
+    - assets/Ascientist.wav
+    - assets/aeroplane.wav
+    - assets/bike.wav
+    - assets/car.wav
+    - assets/firetruck.wav
+    - assets/helicopter.wav
+    - assets/scooter.wav
+    - assets/ship.wav
+    - assets/tractor.wav
+    - assets/ambulance.wav
+    - assets/bus.wav
+    - assets/truck.wav
+    - assets/bicycle.wav
+    - assets/Alphabets/bb.png
+    - assets/gui/left.png
+    - assets/gui/right.png
+    - assets/Alphabets/kd.jpg
+    - assets/st.gif
+    - assets/start.png 
+    - assets/AA.mp3
+    - assets/BA.wav
+    - assets/CA.wav
+    - assets/DA.wav
+    - assets/EA.wav
+    - assets/FA.wav
+    - assets/GA.wav
+    - assets/HA.wav
+    - assets/IA.wav
+    - assets/JA.wav
+    - assets/KA.wav
+    - assets/LA.wav
+    - assets/MA.wav
+    - assets/NA.wav
+    - assets/OA.wav
+    - assets/PA.wav
+    - assets/QA.wav
+    - assets/RA.wav
+    - assets/SA.wav
+    - assets/TA.wav
+    - assets/UA.wav
+    - assets/VA.wav
+    - assets/WA.wav
+    - assets/XA.wav
+    - assets/YA.wav
+    - assets/ZA.wav
+    - assets/1.wav
+    - assets/2.wav
+    - assets/3.wav
+    - assets/4.wav
+    - assets/5.wav
+    - assets/6.wav
+    - assets/7.wav
+    - assets/8.wav
+    - assets/9.wav
+    - assets/10.wav
+    - assets/musicOn.png
+    - assets/gui/musicOff.png
+    - assets/gui/homeButton.png
+    - assets/gui/replayButton.png
+    - assets/gui/settingsButton.png
+    # - assets/home_bg.jpg
+    # - assets/balloon.gif
     - assets/bird_chirp.wav
-    - assets/continue.wav
+    - assets/happy.mp3
     - assets/correct.wav
     - assets/dog_voice.wav
     - assets/elephant.wav
-    - assets/lion.png
-    - assets/monkey.png
-    - assets/monkey.wav
-    - assets/owl.png
-    - assets/owl.wav
-    - assets/panda.png
     - assets/panda.wav
     - assets/tiger.wav
+    - assets/cat.mp3
+    - assets/duck.mp3
+    - assets/butterfly.mp3
+    - assets/cow.mp3
+    - assets/bee.mp3
+    - assets/owl.wav
+    - assets/monkey.mp3
+    - assets/lion.mp3
+    - assets/penguin.mp3
     - assets/wrong.wav
-    - assets/background_image.png
-    - assets/banana.gif
-    - assets/mango.gif
-    - assets/orange.gif
-    - assets/pear.gif
-    - assets/pineapple.gif
-    - assets/wodden_boardd.png
-    - assets/bg_image_countingGame.png
-    - assets/cloudy.png
-    - assets/scorecard_rocket.gif
-    - assets/bgImage_identifyAnimal.png
-    - assets/identify_Animal_vid.mp4
-    - assets/greenBoard.png
-    - assets/counting_goat.gif
-    - assets/bg_identify_colours.jpg
-    - assets/rbb.png
-    - assets/ybb.png
-    - assets/bbb.png
-    - assets/bg_fish.jpg
-    - assets/pizzaa.png
+    - assets/elephant,.wav
+    - assets/dog,.wav
+    - assets/lion,.wav
+    - assets/owl,.wav
+    - assets/monkey,.wav
+    - assets/cow,.wav
+    - assets/bee,.wav
+    - assets/penguin,.wav
+    - assets/butterfly,.wav
+    - assets/caterpillar,.wav
+    - assets/duck,.wav
+    - assets/cat,.wav
+    - assets/applee.wav
+    - assets/banana.wav
+    - assets/carrot.wav
+    - assets/cherry.wav
+    - assets/grapes.wav
+    - assets/mango.wav
+    - assets/orange.wav
+    - assets/pears.wav
+    - assets/pineapple.wav
+    - assets/strawberry.wav
+    - assets/tomato.wav
+    - assets/watermelon.wav
+    # - assets/background_image.png
+    # - assets/wodden_boardd.png
+    # - assets/hanging_board.jpg
+    # - assets/bggggg.jpg
+    # - assets/cloudy.png
+    # - assets/scorecard_rocket.gif
+    # - assets/bgImage_identifyAnimal.png
+    # - assets/maths_train.jpeg
+    # - assets/greenBoard.png
+    # - assets/bouncing_fruits.gif
+    # - assets/ghosla/blueb.png
+    # - assets/ghosla/redb.png
+    # - assets/ghosla/yellowb.png
+    # - assets/ghosla/greenb.png
+    # - assets/ghosla/blueg.jpg
+    # - assets/ghosla/yellowg.jpg
+    # - assets/ghosla/greeng.jpg
+    # - assets/ghosla/redg.jpg
+    # - assets/pizzaa.png
+    - assets/Alphabets/image/A.png
+    - assets/Alphabets/image/C.png
+    - assets/Alphabets/image/B.png
+    - assets/Alphabets/image/D.png
+    - assets/Alphabets/image/E.png
+    - assets/Alphabets/image/F.png
+    - assets/Alphabets/image/G.png
+    - assets/Alphabets/image/H.png
+    - assets/Alphabets/image/I.png
+    - assets/Alphabets/image/J.png
+    - assets/Alphabets/image/K.png
+    - assets/Alphabets/image/L.png
+    - assets/Alphabets/image/M.png
+    - assets/Alphabets/image/N.png
+    - assets/Alphabets/image/O.png
+    - assets/Alphabets/image/P.png
+    - assets/Alphabets/image/Q.png
+    - assets/Alphabets/image/R.png
+    - assets/Alphabets/image/S.png
+    - assets/Alphabets/image/T.png
+    - assets/Alphabets/image/U.png
+    - assets/Alphabets/image/V.png
+    - assets/Alphabets/image/W.png
+    - assets/Alphabets/image/X.png
+    - assets/Alphabets/image/Y.png
+    - assets/Alphabets/image/Z.png
+    # - assets/puzzle/heads/elephant1.png
+    # - assets/puzzle/heads/hen1.png
+    # - assets/puzzle/heads/horse1.png
+    # - assets/puzzle/heads/lion1.png
+    # - assets/puzzle/tails/elephant2.png
+    # - assets/puzzle/tails/horse2.png
+    # - assets/puzzle/tails/lion2.png
+    # - assets/puzzle/tails/hen2.png
+    # - assets/puzzle/full/elephant.jpg
+    # - assets/puzzle/full/hen.jpg
+    # - assets/puzzle/full/horse.jpg
+    # - assets/puzzle/full/lion.jpg
+    # - assets/puzzle/full/cow.png
+    - assets/cs.json
+    
+    
+
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -114,17 +268,24 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: party
+      fonts:
+        - asset: assets\fonts\party.ttf
+    - family: Chicle
+      fonts:
+        - asset: assets\fonts\Chicle.ttf
+    - family: chock
+      fonts:
+        - asset: assets\fonts\chock.ttf
+    - family: num
+      fonts:
+        - asset: assets\fonts\num.ttf
+    - family: Freshman
+      fonts:
+        - asset: assets\fonts\Freshman.ttf
+    # - family: comingSoon
+    #   fonts:
+    #     - asset: assets\fonts\comingSoon.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

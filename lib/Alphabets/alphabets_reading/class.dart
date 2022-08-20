@@ -1,33 +1,34 @@
 class AlphabetsReadingModel {
-   String alphabet;
-   String value;
-  bool accepting;
-   String pronounciation;
+  String image;
+  String forImage;
+  bool itemIsPressed = false;
+  String pronounciation;
+  String title;
+  String description;
 
   AlphabetsReadingModel(
-      {this.alphabet, this.value, this.pronounciation});
+      {this.image, this.forImage, this.pronounciation, this.itemIsPressed,this.title,this.description});
 
-String  getAlphabet() {
-    return alphabet;
-  }
- 
-  set setAlphabet(String alphabet) {
-    alphabet = alphabet;
-  }
-  String  getValue() {
-    return value;
-  }
- 
-  set setValue(String value) {
-    value = value;
-  }
-  String  getPronounciation() {
-    return pronounciation;
-  }
- 
-  set setPronounciation(String pronounciation) {
-    pronounciation = pronounciation;
-  }
+// String  getAlphabet() {
+//     return alphabet;
+//   }
+
+//   set setAlphabet(String alphabet) {
+//     alphabet = alphabet;
+//   }
+//   String  getValue() {
+//     return value;
+//   }
+
+//   set setValue(String value) {
+//     value = value;
+//   }
+//   String  getPronounciation() {
+//     return pronounciation;
+//   }
+
+//   set setPronounciation(String pronounciation) {
+//     pronounciation = pronounciation;
+//   }
 
 }
-

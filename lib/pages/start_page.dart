@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:learning_game/homepage.dart';
+import 'package:learning_game/home.dart';
 import 'dart:math';
 
 class StartPage extends StatefulWidget {
+  static const routeName = 'start';
   const StartPage({Key key}) : super(key: key);
 
   @override
@@ -18,8 +19,7 @@ class _StartPageState extends State<StartPage> {
       DeviceOrientation.landscapeLeft,
     ]);
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+      Navigator.pushReplacementNamed(context, 'home');
     });
   }
 
@@ -35,16 +35,18 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Colors.white,
         body: SafeArea(
             child: Container(
-                color: Colors.amber,
+                //color: Colors.amber,
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 child: Image.asset(
-                  'assets/pppp.png',
+                  'assets/start.png',
+                  //'assets/st.gif',
+                  // height: 250,
+                  // width: 300,
                   fit: BoxFit.fill,
-                ))
-            
-                ));
+                ))));
   }
 }
