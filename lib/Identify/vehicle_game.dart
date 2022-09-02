@@ -97,8 +97,7 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
         ),
     gaddi(
       name: 'Helicopter',
-      image:
-          'https://img.freepik.com/premium-vector/helicopter-flat-style-vector-illustration_6427-225.jpg?w=996',
+      image: 'https://c.tenor.com/Ef1jtR7xalIAAAAi/helicopter-joypixels.gif',
     ),
     gaddi(
       name: 'Fire Truck',
