@@ -1,4 +1,4 @@
-name: learning_game
+name: learn_with_fun
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -42,9 +42,12 @@ dependencies:
   cached_network_image: ^2.5.1
   need_resume: ^1.0.6
   flutter_spinkit: ^5.1.0
-  flutter_inset_box_shadow: ^1.0.8
-  get_it: ^7.2.0
   rename: ^2.0.1
+  overlay_support: ^2.0.1
+  internet_connection_checker:
+  connectivity_plus: ^3.0.2
+  flutter_inset_box_shadow: ^1.0.8
+  firebase_remote_config: ^3.0.3
   
   
   
@@ -144,7 +147,7 @@ flutter:
     - assets/8.wav
     - assets/9.wav
     - assets/10.wav
-    - assets/musicOn.png
+    # - assets/musicOn.png
     - assets/gui/musicOff.png
     - assets/gui/homeButton.png
     - assets/gui/replayButton.png

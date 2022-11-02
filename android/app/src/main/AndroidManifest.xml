@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.learning_game">
-   <application
-        android:label="Learn With Fun"
+    package="com.learn_with_fun">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:label="com.learn_with_fun"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
