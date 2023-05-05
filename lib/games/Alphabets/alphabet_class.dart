@@ -13,4 +13,9 @@ class AlphabetsReadingModel {
       this.itemIsPressed,
       this.title,
       this.description});
+
+  void toggleItemIsPressed() {}
+  void setItemIsPressed(bool value) {
+    itemIsPressed = value;
+  }
 }
