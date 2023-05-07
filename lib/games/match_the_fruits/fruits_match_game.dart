@@ -2,10 +2,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:learn_with_fun/games/match_the_animals/itemModel.dart';
 import 'package:lottie/lottie.dart';
 import 'package:need_resume/need_resume.dart';
-
-import '../match_the_animals/itemModel.dart';
 
 class FruitsMatchGame extends StatefulWidget {
   static const routeName = 'matchFruits';
@@ -46,50 +45,8 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
   }
 
   AudioCache audioCache = AudioCache();
-  List<ItemModel> items2, newlistitems = [];
-  List<ItemModel> items = [
-    ItemModel(
-      value: 'banana',
-      name: 'Banana',
-      image: 'https://assets8.lottiefiles.com/packages/lf20_kyusfkfp.json',
-    ),
-    ItemModel(
-      value: 'orange',
-      name: 'Orange',
-      image: 'https://assets9.lottiefiles.com/packages/lf20_pfsppq45.json',
-    ),
-    ItemModel(
-      value: 'pears',
-      name: 'Pears',
-      image: 'https://assets9.lottiefiles.com/packages/lf20_opljg7yp.json',
-    ),
-    ItemModel(
-      value: 'pineapple',
-      name: 'Pineapple',
-      image: 'https://assets8.lottiefiles.com/packages/lf20_etiq0fbs.json',
-    ),
-    ItemModel(
-      value: 'mango',
-      name: 'Mango',
-      image: 'https://assets8.lottiefiles.com/packages/lf20_sas45b58.json',
-    ),
-    ItemModel(
-      value: 'Watermelon',
-      name: 'Watermelon',
-      image: 'https://assets8.lottiefiles.com/packages/lf20_n2nxpuho.json',
-    ),
-    ItemModel(
-      value: 'grapes',
-      name: 'Grapes',
-      image:
-          'https://media.baamboozle.com/uploads/images/117411/1619424207_176960_url.gif',
-    ),
-    ItemModel(
-      value: 'carrot',
-      name: 'Carrot',
-      image: 'https://assets7.lottiefiles.com/packages/lf20_y3pev23v.json',
-    ),
-  ];
+  List<MatchGameModel> items2, newlistitems = [];
+  List<MatchGameModel> items = MatchGameModel.fruitsItems;
   int score, flag = 0;
   bool gameOver;
 
@@ -107,7 +64,7 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
         break;
       }
     }
-    items2 = List<ItemModel>.from(newlistitems);
+    items2 = List<MatchGameModel>.from(newlistitems);
     items2.shuffle();
   }
 
@@ -129,28 +86,16 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
               if (!gameOver)
                 Column(
                   children: [
-                    Container(
+                    SizedBox(
                       //color: Colors.amber,
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 10.3,
                       child: Row(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              SystemChrome.setPreferredOrientations([
-                                DeviceOrientation.landscapeRight,
-                                DeviceOrientation.landscapeLeft,
-                              ]);
-                              Navigator.pop(context);
-                            },
-                            child: Image.asset(
-                              'assets/gui/back.png',
-                              height: 50,
-                            ),
-                          ),
+                          backButton(context),
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 6.5,
                           ),
@@ -176,13 +121,13 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                     ),
                     Row(
                       children: [
-                        Spacer(flex: 2),
+                        const Spacer(flex: 2),
                         Column(
                           children: newlistitems.map((item) {
                             return Container(
                               // color: Colors.amber,
-                              margin: EdgeInsets.all(6),
-                              child: Draggable<ItemModel>(
+                              margin: const EdgeInsets.all(6),
+                              child: Draggable<MatchGameModel>(
                                 data: item,
                                 childWhenDragging: Container(
                                   height:
@@ -191,7 +136,7 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                                       MediaQuery.of(context).size.width / 3.5,
                                   child: item.name == 'Grapes'
                                       ? CachedNetworkImage(
-                                          imageUrl:item.image,
+                                          imageUrl: item.image,
                                           fit: BoxFit.fill,
                                         )
                                       : Lottie.network(
@@ -199,20 +144,20 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                                           fit: BoxFit.cover,
                                         ),
                                 ),
-                                feedback: Container(
+                                feedback: SizedBox(
                                   height:
                                       MediaQuery.of(context).size.height / 6.6,
                                   width:
                                       MediaQuery.of(context).size.width / 3.4,
                                   child: item.name == 'Grapes'
                                       ? CachedNetworkImage(
-                                          imageUrl:item.image,
+                                          imageUrl: item.image,
                                           fit: BoxFit.fill,
                                         )
                                       : Lottie.network(item.image,
                                           fit: BoxFit.cover),
                                 ),
-                                child: Container(
+                                child: SizedBox(
                                   //color: Colors.amberAccent,
                                   height:
                                       MediaQuery.of(context).size.height / 6.5,
@@ -220,7 +165,7 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                                       MediaQuery.of(context).size.width / 3.2,
                                   child: item.name == 'Grapes'
                                       ? CachedNetworkImage(
-                                          imageUrl:item.image,
+                                          imageUrl: item.image,
                                           fit: BoxFit.fill,
                                         )
                                       : Lottie.network(item.image,
@@ -232,14 +177,14 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                             );
                           }).toList(),
                         ),
-                        Spacer(
+                        const Spacer(
                           flex: 3,
                         ),
-                        Container(
+                        SizedBox(
                           //color: Colors.amber,
                           child: Column(
                             children: items2.map((item) {
-                              return DragTarget<ItemModel>(
+                              return DragTarget<MatchGameModel>(
                                   onAccept: (receivedItem) {
                                     if (item.value == receivedItem.value) {
                                       audioCache.play('correct.wav');
@@ -275,9 +220,9 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                             color: item.accepting
-                                                ? Color.fromARGB(
+                                                ? const Color.fromARGB(
                                                     255, 199, 197, 197)
-                                                : Color.fromARGB(
+                                                : const Color.fromARGB(
                                                     255, 226, 223, 223)),
                                         alignment: Alignment.center,
                                         height:
@@ -286,10 +231,10 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 3,
-                                        margin: EdgeInsets.all(24),
+                                        margin: const EdgeInsets.all(24),
                                         child: Text(
                                           item.name,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                           ),
@@ -298,18 +243,18 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                             }).toList(),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                       ],
                     ),
                   ],
                 ),
               if (gameOver)
-                Container(
+                SizedBox(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: Stack(
                       children: [
-                        Container(
+                        SizedBox(
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
                           child: CachedNetworkImage(
@@ -320,43 +265,17 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                             fit: BoxFit.fill,
                           ),
                         ),
+                        gameCompletedBox(context),
+                        homeButton(context),
                         Align(
-                          alignment: AlignmentDirectional(0, 0.2),
-                          child: Container(
-                            //color: Colors.black12,
-                            width: MediaQuery.of(context).size.width / 1.2,
-                            height: MediaQuery.of(context).size.height / 1.2,
-                            child: Image.asset(
-                              'assets/gui/gameCompleted2.png',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(-0.95, -0.99),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(context, 'home');
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(
-                                'assets/gui/homu.png',
-                                height: 80,
-                                width: 60,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0.04, 0.33),
+                          alignment: const AlignmentDirectional(0.04, 0.33),
                           child: Container(
                             width: 126,
                             height: 38,
                             //color: Colors.black26,
                             child: Center(
                               child: Text('$score',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontFamily: 'Chicle',
                                       color: Colors.teal,
                                       fontWeight: FontWeight.bold,
@@ -365,7 +284,7 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.01, 0.64),
+                          alignment: const AlignmentDirectional(0.01, 0.64),
                           child: InkWell(
                             onTap: () {
                               replay();
@@ -382,5 +301,55 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
             ],
           ),
         ])));
+  }
+
+  Align gameCompletedBox(BuildContext context) {
+    return Align(
+      alignment: const AlignmentDirectional(0, 0.2),
+      child: Container(
+        //color: Colors.black12,
+        width: MediaQuery.of(context).size.width / 1.2,
+        height: MediaQuery.of(context).size.height / 1.2,
+        child: Image.asset(
+          'assets/gui/gameCompleted2.png',
+          fit: BoxFit.fill,
+        ),
+      ),
+    );
+  }
+
+  Align homeButton(BuildContext context) {
+    return Align(
+      alignment: const AlignmentDirectional(-0.95, -0.99),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushReplacementNamed(context, 'home');
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/gui/homu.png',
+            height: 80,
+            width: 60,
+          ),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector backButton(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft,
+        ]);
+        Navigator.pop(context);
+      },
+      child: Image.asset(
+        'assets/gui/back.png',
+        height: 50,
+      ),
+    );
   }
 }

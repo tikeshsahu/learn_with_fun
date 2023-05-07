@@ -2,11 +2,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:learn_with_fun/games/match_the_animals/itemModel.dart';
 import 'package:lottie/lottie.dart';
 import 'package:need_resume/need_resume.dart';
-
-import 'itemModel.dart';
 
 class MatchGame extends StatefulWidget {
   static const routeName = 'matchAnimals';
@@ -25,7 +23,7 @@ class _MatchGameState extends ResumableState<MatchGame> {
   void onReady() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
+      //DeviceOrientation.portraitDown,
     ]);
   }
 
@@ -33,7 +31,7 @@ class _MatchGameState extends ResumableState<MatchGame> {
   void onResume() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
+      //DeviceOrientation.portraitDown,
     ]);
   }
 
@@ -42,99 +40,15 @@ class _MatchGameState extends ResumableState<MatchGame> {
     super.dispose();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
+      //DeviceOrientation.landscapeLeft,
     ]);
   }
 
   AudioCache audioCache = AudioCache();
-  List<ItemModel> items2, newlistitems = [];
+  List<MatchGameModel> items2, newlistitems = [];
   int score, flag = 0;
   bool gameOver;
-  List<ItemModel> items = [
-    ItemModel(
-        value: 'dog',
-        name: 'Dog',
-        image:
-            'https://assets1.lottiefiles.com/private_files/lf30_h8chtt4u.json',
-        music: 'dog_voice.wav'),
-    ItemModel(
-        value: 'lion',
-        name: 'Lion',
-        image: 'https://assets6.lottiefiles.com/packages/lf20_vmollwvl.json',
-        music: 'lion.mp3'),
-    ItemModel(
-        value: 'owl',
-        name: 'Owl',
-        image: 'https://assets2.lottiefiles.com/packages/lf20_xGSFL9.json',
-        music: 'owl.wav'),
-    ItemModel(
-        value: 'elephant',
-        name: 'Elephant',
-        image: 'https://assets7.lottiefiles.com/packages/lf20_xgwzkywz.json',
-        music: 'elephant.wav'),
-    ItemModel(
-        value: 'monkey',
-        name: 'Monkey',
-        image: 'https://assets10.lottiefiles.com/packages/lf20_gvxqafpw.json',
-        music: 'monkey.wav'),
-    ItemModel(
-        value: 'cow',
-        name: 'Cow',
-        image:
-            'https://i.pinimg.com/originals/a2/01/4f/a2014f435ab140e724923d6d594ca935.gif',
-        music: 'cow.mp3'),
-    ItemModel(
-        value: 'bee',
-        name: 'Bee',
-        image:
-            'https://assets9.lottiefiles.com/private_files/lf30_ldieofjb.json',
-        music: 'bee.mp3'),
-    ItemModel(
-        value: 'penguin',
-        name: 'Penguin',
-        image: 'https://assets8.lottiefiles.com/packages/lf20_44y9y3ky.json',
-        music: 'penguin.mp3'), //desktop file
-    ItemModel(
-        value: 'butterfly',
-        name: 'Butterfly',
-        image:
-            'https://assets10.lottiefiles.com/private_files/lf30_ce3fctyu.json',
-        music: 'butterfly.mp3'),
-    ItemModel(
-        value: 'caterpiller',
-        name: 'Caterpiller',
-        image: 'https://assets6.lottiefiles.com/packages/lf20_opjebefq.json',
-        music: ''),
-    // ItemModel(
-    //     value: 'turtle',
-    //     name: 'Turtle',
-    //     image:
-    //         'https://assets10.lottiefiles.com/private_files/lf30_51d8pwk4.json',
-    //     music: 'panda.wav'),
-    // ItemModel(
-    //     value: 'croc',
-    //     name: 'Crocodile',
-    //     image: 'https://assets9.lottiefiles.com/packages/lf20_f54ylzjs.json',
-    //     music: 'owl.wav'),
-    ItemModel(
-        value: 'duck',
-        name: 'Duck',
-        image:
-            'https://assets2.lottiefiles.com/private_files/lf30_oiaetlzu.json',
-        music: 'duck.mp3'),
-    ItemModel(
-        value: 'cat',
-        name: 'Cat',
-        //https://assets1.lottiefiles.com/private_files/lf30_b91uuvwz.json
-        image:
-            'https://assets10.lottiefiles.com/private_files/lf30_axnm9fti.json',
-        music: 'cat.mp3'),
-    // ItemModel(
-    //     value: 'kangaroo',
-    //     name: 'Kangaroo',
-    //     image: 'https://assets8.lottiefiles.com/packages/lf20_odsaqoyl.json',
-    //     music: 'owl.wav'),
-  ];
+  List<MatchGameModel> items = MatchGameModel.animalsItems;
 
   @override
   void initGame() {
@@ -151,7 +65,7 @@ class _MatchGameState extends ResumableState<MatchGame> {
       }
     }
 
-    items2 = List<ItemModel>.from(newlistitems);
+    items2 = List<MatchGameModel>.from(newlistitems);
     items2.shuffle();
   }
 
@@ -171,44 +85,30 @@ class _MatchGameState extends ResumableState<MatchGame> {
             child: Column(
           children: [
             if (!gameOver)
-              Container(
-                //color: Colors.green,
+              SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Column(
                   children: [
-                    Container(
-                      //color: Colors.amber,
+                    SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 10.3,
                       child: Row(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              SystemChrome.setPreferredOrientations([
-                                DeviceOrientation.landscapeRight,
-                                DeviceOrientation.landscapeLeft,
-                              ]);
-                              Navigator.pop(context);
-                            },
-                            child: Image.asset(
-                              'assets/gui/back.png',
-                              height: 50,
-                            ),
-                          ),
+                          backButton(context),
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 6.5,
                           ),
                           Text.rich(TextSpan(children: [
-                            TextSpan(
+                            const TextSpan(
                                 text: 'Score :  ',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 40)),
                             TextSpan(
                                 text: '$score',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.teal,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 45))
@@ -216,31 +116,29 @@ class _MatchGameState extends ResumableState<MatchGame> {
                         ],
                       ),
                     ),
-                    Container(
-                      //color: Colors.black38,
+                    SizedBox(
                       height: MediaQuery.of(context).size.height / 1.12,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Spacer(flex: 2),
-                          Container(
-                            //color: Colors.amber,
+                          const Spacer(flex: 2),
+                          SizedBox(
                             height: MediaQuery.of(context).size.height / 1.15,
                             child: Column(
                               children: newlistitems.map((item) {
                                 return Container(
-                                   //color: Colors.black38,
-                                  margin: EdgeInsets.all(6),
-                                  child: Draggable<ItemModel>(
+                                  margin: const EdgeInsets.all(6),
+                                  child: Draggable<MatchGameModel>(
                                     data: item,
-                                    childWhenDragging: Container(
+                                    childWhenDragging: SizedBox(
                                       height:
-                                          MediaQuery.of(context).size.height / 7,
-                                      width:
-                                          MediaQuery.of(context).size.width / 3.5,
+                                          MediaQuery.of(context).size.height /
+                                              7,
+                                      width: MediaQuery.of(context).size.width /
+                                          3.5,
                                       child: item.name == 'Cow'
                                           ? CachedNetworkImage(
-                                              imageUrl:item.image,
+                                              imageUrl: item.image,
                                               fit: BoxFit.fill,
                                             )
                                           : Lottie.network(
@@ -253,26 +151,28 @@ class _MatchGameState extends ResumableState<MatchGame> {
                                       // ),
                                     ),
                                     feedback: Container(
-                                      height: MediaQuery.of(context).size.height /
-                                          6.6,
-                                      width:
-                                          MediaQuery.of(context).size.width / 3.4,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              6.6,
+                                      width: MediaQuery.of(context).size.width /
+                                          3.4,
                                       child: item.name == 'Cow'
                                           ? CachedNetworkImage(
-                                              imageUrl:item.image,
+                                              imageUrl: item.image,
                                               fit: BoxFit.fill,
                                             )
                                           : Lottie.network(item.image,
                                               fit: BoxFit.cover),
                                     ),
-                                    child: Container(
-                                      height: MediaQuery.of(context).size.height /
-                                          6.3,
-                                      width:
-                                          MediaQuery.of(context).size.width / 2.8,
+                                    child: SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              6.3,
+                                      width: MediaQuery.of(context).size.width /
+                                          2.8,
                                       child: item.name == 'Cow'
                                           ? CachedNetworkImage(
-                                              imageUrl:item.image,
+                                              imageUrl: item.image,
                                               fit: BoxFit.fill,
                                             )
                                           : Lottie.network(item.image,
@@ -283,15 +183,14 @@ class _MatchGameState extends ResumableState<MatchGame> {
                               }).toList(),
                             ),
                           ),
-                          Spacer(
+                          const Spacer(
                             flex: 3,
                           ),
-                          Container(
-                            height: MediaQuery.of(context).size.height ,
-                            //color: Colors.indigo,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height,
                             child: Column(
                               children: items2.map((item) {
-                                return DragTarget<ItemModel>(
+                                return DragTarget<MatchGameModel>(
                                     onAccept: (receivedItem) {
                                       if (item.value == receivedItem.value) {
                                         audioCache.play('correct.wav');
@@ -327,21 +226,23 @@ class _MatchGameState extends ResumableState<MatchGame> {
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                               color: item.accepting
-                                                  ? Color.fromARGB(
+                                                  ? const Color.fromARGB(
                                                       255, 199, 197, 197)
-                                                  : Color.fromARGB(
+                                                  : const Color.fromARGB(
                                                       255, 226, 223, 223)),
                                           alignment: Alignment.center,
-                                          height:
-                                              MediaQuery.of(context).size.height /
-                                                  8.5,
-                                          width:
-                                              MediaQuery.of(context).size.width /
-                                                  3,
-                                          margin: EdgeInsets.all(22),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              8.5,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              3,
+                                          margin: const EdgeInsets.all(22),
                                           child: Text(
                                             item.name,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 24,
                                             ),
@@ -350,7 +251,6 @@ class _MatchGameState extends ResumableState<MatchGame> {
                               }).toList(),
                             ),
                           ),
-                          
                         ],
                       ),
                     ),
@@ -358,12 +258,12 @@ class _MatchGameState extends ResumableState<MatchGame> {
                 ),
               ),
             if (gameOver)
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
-                    Container(
+                    SizedBox(
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
                       child: CachedNetworkImage(
@@ -374,9 +274,8 @@ class _MatchGameState extends ResumableState<MatchGame> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0, 0.2),
-                      child: Container(
-                        //color: Colors.black12,
+                      alignment: const AlignmentDirectional(0, 0.2),
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width / 1.12,
                         height: MediaQuery.of(context).size.height / 1.2,
                         child: Image.asset(
@@ -386,7 +285,7 @@ class _MatchGameState extends ResumableState<MatchGame> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-0.95, -0.99),
+                      alignment: const AlignmentDirectional(-0.95, -0.99),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.popAndPushNamed(context, 'home');
@@ -403,14 +302,14 @@ class _MatchGameState extends ResumableState<MatchGame> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.04, 0.33),
+                      alignment: const AlignmentDirectional(0.04, 0.33),
                       child: Container(
                         width: 126,
                         height: 38,
                         //color: Colors.black26,
                         child: Center(
                           child: Text('$score',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: 'Chicle',
                                   color: Colors.teal,
                                   fontWeight: FontWeight.bold,
@@ -419,12 +318,12 @@ class _MatchGameState extends ResumableState<MatchGame> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.01, 0.64),
+                      alignment: const AlignmentDirectional(0.01, 0.64),
                       child: InkWell(
                         onTap: () {
                           replay();
                         },
-                        child: Container(
+                        child: const SizedBox(
                           width: 80,
                           height: 110,
                           //color: Colors.black26,
@@ -436,5 +335,21 @@ class _MatchGameState extends ResumableState<MatchGame> {
               ),
           ],
         )));
+  }
+
+  GestureDetector backButton(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft,
+        ]);
+        Navigator.pop(context);
+      },
+      child: Image.asset(
+        'assets/gui/back.png',
+        height: 50,
+      ),
+    );
   }
 }
