@@ -12,7 +12,7 @@ import '../match_the_animals/itemModel.dart';
 
 class Fruits extends StatefulWidget {
   static const routeName = 'fruits';
-  const Fruits({Key key}) : super(key: key);
+  const Fruits({Key? key}) : super(key: key);
 
   @override
   State<Fruits> createState() => _FruitsState();
@@ -21,17 +21,19 @@ class Fruits extends StatefulWidget {
 class _FruitsState extends ResumableState<Fruits> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pop(true);
+    return false;
   }
 
+  @override
   void initState() {
     super.initState();
     items.shuffle();
-    audioCache.play(items[0].audio);
+    //audioCache.play(items[0].audio!);
   }
 
+  @override
   void onReady() {
-    // Implement your code inside here
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -40,7 +42,7 @@ class _FruitsState extends ResumableState<Fruits> {
 
   @override
   void onResume() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -67,7 +69,7 @@ class _FruitsState extends ResumableState<Fruits> {
               slide(context),
               SliderLeftButton(caro: caro),
               SliderRightButton(caro: caro),
-              playButton(context),
+              // playButton(context),
             ],
           ),
         ),
@@ -80,8 +82,7 @@ class _FruitsState extends ResumableState<Fruits> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: CachedNetworkImage(
-        imageUrl:
-            'https://img.freepik.com/free-vector/orange-patterned-frame_53876-93816.jpg?w=996&t=st=1658840542~exp=1658841142~hmac=b6f676f59b865293a8ed18827ae0e7f854471a3a1d234ebebf561f7fdb076227',
+        imageUrl: 'https://img.freepik.com/free-vector/orange-patterned-frame_53876-93816.jpg?w=996&t=st=1658840542~exp=1658841142~hmac=b6f676f59b865293a8ed18827ae0e7f854471a3a1d234ebebf561f7fdb076227',
         fit: BoxFit.fill,
       ),
     );
@@ -121,7 +122,7 @@ class _FruitsState extends ResumableState<Fruits> {
                 enableInfiniteScroll: false,
                 viewportFraction: 0.90,
                 onPageChanged: (index, reason) {
-                  audioCache.play(items[index].audio);
+                  //audioCache.play(items[index].audio!);
                 },
                 autoPlayCurve: Curves.fastOutSlowIn),
             itemCount: items.length,
@@ -134,27 +135,18 @@ class _FruitsState extends ResumableState<Fruits> {
                     //color: Color(0xFFFFFFF0),
                     child: GestureDetector(
                       child: ClipRRect(
-                        child: items[index].name == 'Apple' ||
-                                items[index].name == 'Grapes' ||
-                                items[index].name == 'Strawberry' ||
-                                items[index].name == 'Cherry' ||
-                                items[index].name == 'Pineapple' ||
-                                items[index].name == 'Watermelon' ||
-                                items[index].name == 'Orange'
+                        child: items[index].name == 'Apple' || items[index].name == 'Grapes' || items[index].name == 'Strawberry' || items[index].name == 'Cherry'
+                            // || items[index].name == 'Watermelon'
+                            // || items[index].name == 'Orange'
                             ? CachedNetworkImage(
                                 fit: BoxFit.contain,
                                 imageUrl: items[index].image,
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        const SpinKitDualRing(
-                                            color: Colors.amberAccent),
+                                progressIndicatorBuilder: (context, url, downloadProgress) => const SpinKitDualRing(color: Colors.amberAccent),
                                 // CircularProgressIndicator(
                                 //     value: downloadProgress.progress),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
+                                errorWidget: (context, url, error) => const Icon(Icons.error),
                               )
-                            : Lottie.network(items[index].image,
-                                fit: BoxFit.contain),
+                            : Lottie.network(items[index].image, fit: BoxFit.contain),
                       ),
                     ),
                   ),
@@ -193,7 +185,7 @@ class _FruitsState extends ResumableState<Fruits> {
 
   Align playButton(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional(0.95, -1.05),
+      alignment: const AlignmentDirectional(0.95, -1.05),
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, 'matchFruits');

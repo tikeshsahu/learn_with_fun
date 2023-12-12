@@ -12,7 +12,7 @@ import 'package:need_resume/need_resume.dart';
 
 class IdentifyVehicles extends StatefulWidget {
   static const routeName = 'vehicles';
-  const IdentifyVehicles({Key key}) : super(key: key);
+  const IdentifyVehicles({Key? key}) : super(key: key);
 
   @override
   State<IdentifyVehicles> createState() => _IdentifyVehiclesState();
@@ -26,9 +26,9 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
     audioCache.play(gaddi[0].audio);
   }
 
+  @override
   void onReady() {
-    // Implement your code inside here
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -37,7 +37,7 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
 
   @override
   void onResume() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -49,6 +49,7 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
   AudioCache audioCache = AudioCache();
   Future<bool> _onWillPop() async {
     Navigator.of(context).pop(true);
+    return false;
   }
 
   @override
@@ -76,8 +77,8 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
 
   Align slider(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional(-0.12, 1),
-      child: Container(
+      alignment: const AlignmentDirectional(-0.12, 1),
+      child: SizedBox(
         width: MediaQuery.of(context).size.width / 1.5,
         height: MediaQuery.of(context).size.height / 1.44,
         //color: Colors.amber,
@@ -114,9 +115,9 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
                                 imageUrl: gaddi[index].image,
                                 progressIndicatorBuilder: (context, url,
                                         downloadProgress) =>
-                                    SpinKitDualRing(color: Colors.amberAccent),
+                                    const SpinKitDualRing(color: Colors.amberAccent),
                                 errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
+                                    const Icon(Icons.error),
                               )
                             : Lottie.network(gaddi[index].image,
                                 fit: gaddi[index].name == 'Cat'
@@ -161,7 +162,7 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
 
   Align homeButton(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional(-0.95, -0.95),
+      alignment: const AlignmentDirectional(-0.95, -0.95),
       child: GestureDetector(
         onTap: () {
           Navigator.pop(context);
@@ -195,7 +196,7 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
 
   Align playButton(BuildContext context) {
     return Align(
-      alignment: AlignmentDirectional(0.95, -1.05),
+      alignment: const AlignmentDirectional(0.95, -1.05),
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, 'vehicleGame');

@@ -4,13 +4,15 @@ import 'dart:math';
 
 class StartPage extends StatefulWidget {
   static const routeName = 'start';
-  const StartPage({Key key}) : super(key: key);
+  const StartPage({Key? key}) : super(key: key);
 
   @override
   State<StartPage> createState() => _StartPageState();
 }
 
 class _StartPageState extends State<StartPage> {
+  
+  @override
   void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([

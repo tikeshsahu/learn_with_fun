@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:learn_with_fun/dependency_injection.dart';
 import 'package:learn_with_fun/screens/splash_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'games/Alphabets/alphabet_reading.dart';
@@ -12,7 +14,7 @@ import 'games/match_the_animals/animal_match_game.dart';
 import 'games/match_the_fruits/fruits.dart';
 import 'games/match_the_fruits/fruits_match_game.dart';
 import 'games/numbers_reading/numbers_reading.dart';
-import 'screens/homeScreen.dart';
+import 'screens/home_screen.dart';
 
 void main() {
 // async {
@@ -22,10 +24,13 @@ void main() {
 //     DeviceOrientation.portraitDown,
 //   ]);
 
-  runApp(MyApp());
+  runApp(const MyApp());
+  DependencyInjection.init();
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -33,7 +38,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) => OverlaySupport.global(
-        child: MaterialApp(
+        child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: 'home',
           routes: {

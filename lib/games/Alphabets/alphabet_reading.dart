@@ -12,16 +12,17 @@ import '../../class/alphabet_class.dart';
 
 class AlphabetsLearning extends StatefulWidget {
   static const routeName = 'alphaReading';
-  const AlphabetsLearning({Key key}) : super(key: key);
+  const AlphabetsLearning({Key? key}) : super(key: key);
 
   @override
   State<AlphabetsLearning> createState() => _AlphabetsLearningState();
 }
 
 class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
+  @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -29,9 +30,9 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
     audioCache.play("AA.mp3");
   }
 
+  @override
   void onReady() {
-    // Implement your code inside here
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -40,7 +41,7 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
 
   @override
   void onResume() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -48,10 +49,11 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
   }
 
   AudioCache audioCache = AudioCache();
-  bool loading;
+  bool loading = false;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pop(true);
+    return false;
   }
 
   List<AlphabetsReadingModel> alphabets = AlphabetsReadingModel.alphabets;
@@ -67,14 +69,7 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
               child: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Stack(children: [
-          backgroundImage(context),
-          greenBoardImage(context),
-          homeButton(context),
-          SliderLeftButton(caro: caro),
-          SliderRightButton(caro: caro),
-          slider(context)
-        ]),
+        child: Stack(children: [backgroundImage(context), greenBoardImage(context), homeButton(context), SliderLeftButton(caro: caro), SliderRightButton(caro: caro), slider(context)]),
       ))),
     );
   }
@@ -82,7 +77,7 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
   Align slider(BuildContext context) {
     return Align(
       alignment: const AlignmentDirectional(0.00, -0.24),
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(context).size.width / 1.45,
         //color: Colors.black38,
         child: CarouselSlider.builder(
@@ -101,17 +96,14 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 150,
                     width: 140,
                     //color: Colors.amber,
                     child: GestureDetector(
                       child: Image.asset(
                         alphabets[index].image,
-                        fit: alphabets[index].title == 'W' ||
-                                alphabets[index].description == 'I'
-                            ? BoxFit.contain
-                            : BoxFit.cover,
+                        fit: alphabets[index].title == 'W' || alphabets[index].description == 'I' ? BoxFit.contain : BoxFit.cover,
                       ),
                       onTap: () {
                         // setState(() {
@@ -126,10 +118,7 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
                   ),
                   const Text(
                     'For',
-                    style: TextStyle(
-                        fontFamily: 'Chicle',
-                        fontSize: 35,
-                        color: Colors.white),
+                    style: TextStyle(fontFamily: 'Chicle', fontSize: 35, color: Colors.white),
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 24,
@@ -191,8 +180,9 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
   }
 
   Image backgroundImage(BuildContext context) {
-    return Image.network(
-      'https://png.pngtree.com/thumb_back/fw800/back_pic/03/87/56/9757d25d61d31ad.jpg',
+    return Image.asset(
+      'assets/Alphabets/alphabetReadingBG.png',
+      //'https://png.pngtree.com/thumb_back/fw800/back_pic/03/87/56/9757d25d61d31ad.jpg',
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       fit: BoxFit.fill,

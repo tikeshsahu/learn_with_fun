@@ -2,9 +2,9 @@ class Professtions {
   final String name;
   final String image;
   final String pronounciation;
-  final String vid;
+  //final String vid;
 
-  Professtions({this.name, this.image, this.pronounciation, this.vid});
+  Professtions({required this.name, required this.image, required this.pronounciation});
 
   static List<Professtions> pros = [
     Professtions(

@@ -13,7 +13,7 @@ import 'itemModel.dart';
 
 class Animals extends StatefulWidget {
   static const routeName = 'animals';
-  const Animals({Key key}) : super(key: key);
+  const Animals({Key? key}) : super(key: key);
 
   @override
   State<Animals> createState() => _AnimalsState();
@@ -22,16 +22,19 @@ class Animals extends StatefulWidget {
 class _AnimalsState extends ResumableState<Animals> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pop(true);
+    return false;
   }
 
+  @override
   void initState() {
     super.initState();
     items.shuffle();
-    audioCache.play(items[0].audio);
+    audioCache.play(items[0].audio!);
   }
 
+  @override
   void onReady() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -40,12 +43,21 @@ class _AnimalsState extends ResumableState<Animals> {
 
   @override
   void onResume() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
   }
+
+  // @override
+  // dispose() {
+  //   super.dispose();
+  //   SystemChrome.setPreferredOrientations([
+  //     DeviceOrientation.landscapeRight,
+  //     DeviceOrientation.landscapeLeft,
+  //   ]);
+  // }
 
   List<MatchGameModel> items = MatchGameModel.animalsItems;
   CarouselController caro = CarouselController();
@@ -66,7 +78,7 @@ class _AnimalsState extends ResumableState<Animals> {
               slider(context),
               SliderLeftButton(caro: caro),
               SliderRightButton(caro: caro),
-              playButton(context),
+              //playButton(context),
             ],
           ),
         ),
@@ -79,8 +91,7 @@ class _AnimalsState extends ResumableState<Animals> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: CachedNetworkImage(
-        imageUrl:
-            'https://img.freepik.com/free-vector/organic-flat-jungle-background_23-2148952811.jpg?w=996&t=st=1658824128~exp=1658824728~hmac=c65dbac5c9839e812060d8154ca4eb6e3d2745082595ee999554873575c76a5a',
+        imageUrl: 'https://img.freepik.com/free-vector/organic-flat-jungle-background_23-2148952811.jpg?w=996&t=st=1658824128~exp=1658824728~hmac=c65dbac5c9839e812060d8154ca4eb6e3d2745082595ee999554873575c76a5a',
         //'assets/animalBack.png',
         fit: BoxFit.fill,
       ),
@@ -122,7 +133,7 @@ class _AnimalsState extends ResumableState<Animals> {
                 enableInfiniteScroll: false,
                 viewportFraction: 0.90,
                 onPageChanged: (index, reason) {
-                  audioCache.play(items[index].audio);
+                  audioCache.play(items[index].audio!);
                 },
                 autoPlayCurve: Curves.fastOutSlowIn),
             itemCount: items.length,
@@ -134,31 +145,22 @@ class _AnimalsState extends ResumableState<Animals> {
                     width: MediaQuery.of(context).size.width / 2,
                     child: GestureDetector(
                       child: ClipRRect(
-                        child: items[index].name == 'Cow' ||
-                                items[index].name == 'Elephant' ||
-                                items[index].name == 'Penguin'
+                        child: items[index].name == 'Cow' || items[index].name == 'Elephant' || items[index].name == 'Penguin'
                             ? CachedNetworkImage(
                                 fit: BoxFit.contain,
                                 imageUrl: items[index].image,
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        const SpinKitDualRing(
-                                            color: Colors.amberAccent),
+                                progressIndicatorBuilder: (context, url, downloadProgress) => const SpinKitDualRing(color: Colors.amberAccent),
                                 // CircularProgressIndicator(
                                 //     value: downloadProgress.progress),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(
+                                errorWidget: (context, url, error) => const Icon(
                                   Icons.error,
                                   size: 35,
                                 ),
                               )
-                            : Lottie.network(items[index].image,
-                                fit: items[index].name == 'Cat'
-                                    ? BoxFit.contain
-                                    : BoxFit.contain),
+                            : Lottie.network(items[index].image, fit: items[index].name == 'Cat' ? BoxFit.contain : BoxFit.contain),
                       ),
                       onTap: () {
-                        audioCache.play(items[index].music);
+                        audioCache.play(items[index].music!);
                       },
                     ),
                     decoration: BoxDecoration(

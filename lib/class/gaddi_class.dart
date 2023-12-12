@@ -1,8 +1,10 @@
 class Gaddi {
   final String name;
   final String image;
-  final int value;
-  Gaddi({this.name, this.image, this.value});
+  // final int value;
+  Gaddi({required this.name, required this.image, 
+  // this.value
+  });
 
   static List<Gaddi> vehicles = [
     Gaddi(

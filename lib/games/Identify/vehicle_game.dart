@@ -11,19 +11,21 @@ import 'dart:math';
 
 class VehicleGame extends StatefulWidget {
   static const routeName = 'vehicleGame';
-  const VehicleGame({Key key}) : super(key: key);
+  const VehicleGame({Key? key}) : super(key: key);
 
   @override
   State<VehicleGame> createState() => _VehicleGameState();
 }
 
 class _VehicleGameState extends ResumableState<VehicleGame> {
+  @override
   void initState() {
     super.initState();
     initGame();
     shuffleAndSetAnswer();
   }
 
+  @override
   void onReady() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -39,12 +41,11 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
     ]);
   }
 
-  int ansIndex;
+  int ansIndex = 0;
   List<Gaddi> vehicles = Gaddi.vehicles;
 
   shuffleAndSetAnswer() {
     vehicles.shuffle();
-
     var newRandom = Random();
     var random = 1 + newRandom.nextInt(4 - 1);
     ansIndex = random;
@@ -58,12 +59,12 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
     });
   }
 
-  int score, flag = 0;
+  int score = 0;
+  int flag = 0;
   bool gameOver = false;
   final controller = ConfettiController();
   AudioCache audioCache = AudioCache();
 
-  @override
   void initGame() {
     gameOver = false;
     score = 0;
@@ -94,7 +95,7 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
                 slider(context),
                 Align(
                   alignment: const AlignmentDirectional(0.90, 0.74),
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height / 1.3,
                     width: MediaQuery.of(context).size.width / 2.7,
                     //color: Colors.amber,
@@ -116,7 +117,7 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
                                     audioCache.play('wrong.wav');
                                   }
                                 },
-                                child: Container(
+                                child: SizedBox(
                                     //color: Colors.black26,
                                     height: MediaQuery.of(context).size.height /
                                         6.7,
@@ -165,7 +166,7 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
                 ),
                 Align(
                   alignment: const AlignmentDirectional(-0.95, -0.90),
-                  child: Container(
+                  child: SizedBox(
                     //color: Colors.amber,
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 7,

@@ -4,9 +4,9 @@ class NumbersLearn {
   String pronounciation;
 
   NumbersLearn({
-    this.num,
-    this.dialogImage,
-    this.pronounciation,
+    required this.num,
+    required this.dialogImage,
+    required this.pronounciation,
   });
 
   static List<NumbersLearn> numbers = [

@@ -1,6 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +12,7 @@ import 'package:need_resume/need_resume.dart';
 
 class IdentifyProfession extends StatefulWidget {
   static const routeName = 'professions';
-  const IdentifyProfession({Key key}) : super(key: key);
+  const IdentifyProfession({Key? key}) : super(key: key);
 
   @override
   State<IdentifyProfession> createState() => _IdentifyProfessionState();
@@ -27,9 +26,10 @@ class _IdentifyProfessionState extends ResumableState<IdentifyProfession> {
     audioCache.play(pros[0].pronounciation);
   }
 
+  @override
   void onReady() {
     // Implement your code inside here
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -38,7 +38,7 @@ class _IdentifyProfessionState extends ResumableState<IdentifyProfession> {
 
   @override
   void onResume() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -51,6 +51,7 @@ class _IdentifyProfessionState extends ResumableState<IdentifyProfession> {
   AudioCache audioCache = AudioCache();
   Future<bool> _onWillPop() async {
     Navigator.of(context).pop(true);
+    return false;
   }
 
   @override

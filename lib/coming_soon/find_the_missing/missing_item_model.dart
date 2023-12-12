@@ -3,5 +3,5 @@ class MissingModel {
   final List ansNumbers;
   final String questionMark;
 
-  MissingModel({this.ansNumbers, this.queNumbers, this.questionMark});
+  MissingModel({required this.ansNumbers, required this.queNumbers, required this.questionMark});
 }

@@ -10,7 +10,7 @@ import 'package:learn_with_fun/widgets/sliderRightButton.dart';
 
 class NumbersReading extends StatefulWidget {
   static const routeName = 'numbersreading';
-  const NumbersReading({Key key}) : super(key: key);
+  const NumbersReading({Key? key}) : super(key: key);
 
   @override
   State<NumbersReading> createState() => _NumbersReadingState();
@@ -29,6 +29,7 @@ class _NumbersReadingState extends State<NumbersReading> {
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pop(true);
+    return false;
   }
 
   @override

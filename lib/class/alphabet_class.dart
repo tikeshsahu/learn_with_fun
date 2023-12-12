@@ -7,12 +7,12 @@ class AlphabetsReadingModel {
   String description;
 
   AlphabetsReadingModel(
-      {this.image,
-      this.forImage,
-      this.pronounciation,
-      this.itemIsPressed,
-      this.title,
-      this.description});
+      {required this.image,
+      required this.forImage,
+      required this.pronounciation,
+      required this.itemIsPressed,
+      required this.title,
+      required this.description});
 
   static List<AlphabetsReadingModel> alphabets = [
     AlphabetsReadingModel(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SliderRightButton extends StatelessWidget {
   final CarouselController caro;
 
-  const SliderRightButton({Key key, this.caro}) : super(key: key);
+  const SliderRightButton({Key? key, required this.caro}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -8,18 +8,20 @@ import 'package:need_resume/need_resume.dart';
 
 class FruitsMatchGame extends StatefulWidget {
   static const routeName = 'matchFruits';
-  const FruitsMatchGame({Key key}) : super(key: key);
+  const FruitsMatchGame({Key? key}) : super(key: key);
 
   @override
   State<FruitsMatchGame> createState() => _FruitsMatchGameState();
 }
 
 class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
+  @override
   void initState() {
     super.initState();
     initGame();
   }
 
+  @override
   void onReady() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -45,12 +47,13 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
   }
 
   AudioCache audioCache = AudioCache();
-  List<MatchGameModel> items2, newlistitems = [];
+  List<MatchGameModel> items2 = [];
+  List<MatchGameModel> newlistitems = [];
   List<MatchGameModel> items = MatchGameModel.fruitsItems;
-  int score, flag = 0;
-  bool gameOver;
+  int score = 0;
+  int flag = 0;
+  bool gameOver = false;
 
-  @override
   void initGame() {
     gameOver = false;
     score = 0;
