@@ -46,7 +46,8 @@ class _MatchGameState extends ResumableState<MatchGame> {
     ]);
   }
 
-  AudioCache audioCache = AudioCache();
+  // AudioCache audioCache = AudioCache();
+  final player = AudioPlayer();
   List<MatchGameModel> items2 = [];
   List<MatchGameModel> newlistitems = [];
   int score = 0;
@@ -185,7 +186,7 @@ class _MatchGameState extends ResumableState<MatchGame> {
                                   return DragTarget<MatchGameModel>(
                                       onAccept: (receivedItem) {
                                         if (item.value == receivedItem.value) {
-                                          audioCache.play('correct.wav');
+                                          player.play(AssetSource('correct.wav'));
                                           // audioCache.play(item.music);
                                           setState(() {
                                             newlistitems.remove(receivedItem);
@@ -194,7 +195,7 @@ class _MatchGameState extends ResumableState<MatchGame> {
                                           score += 20;
                                           item.accepting = false;
                                         } else {
-                                          audioCache.play('wrong.wav');
+                                          player.play(AssetSource('wrong.wav'));
                                           setState(() {
                                             item.accepting = false;
                                           });

@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learn_with_fun/dependency_injection.dart';
@@ -16,16 +18,18 @@ import 'games/match_the_fruits/fruits_match_game.dart';
 import 'games/numbers_reading/numbers_reading.dart';
 import 'screens/home_screen.dart';
 
-void main() {
-// async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await SystemChrome.setPreferredOrientations([
-//     DeviceOrientation.portraitUp,
-//     DeviceOrientation.portraitDown,
-//   ]);
-
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   DependencyInjection.init();
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+  
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -64,4 +68,8 @@ class _MyAppState extends State<MyApp> {
           },
         ),
       );
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
 }

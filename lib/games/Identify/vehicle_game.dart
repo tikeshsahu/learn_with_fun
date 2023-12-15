@@ -59,6 +59,7 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
     });
   }
 
+  final player = AudioPlayer();
   int score = 0;
   int flag = 0;
   bool gameOver = false;
@@ -87,8 +88,7 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: CachedNetworkImage(
-                    imageUrl:
-                        'https://img.freepik.com/free-vector/cartoon-empty-underground-car-parking-indoor-interior-garage-city-shopping-mall-basement-with-marking-road-automobile-park-places-columns-sign-exit-guiding-arrows-concrete-floor_88138-809.jpg?w=1060&t=st=1659092730~exp=1659093330~hmac=736ca94b249a853697fb1623b72a5f51598d67dd153e771e6b84df3d0eb5651d',
+                    imageUrl: 'https://img.freepik.com/free-vector/cartoon-empty-underground-car-parking-indoor-interior-garage-city-shopping-mall-basement-with-marking-road-automobile-park-places-columns-sign-exit-guiding-arrows-concrete-floor_88138-809.jpg?w=1060&t=st=1659092730~exp=1659093330~hmac=736ca94b249a853697fb1623b72a5f51598d67dd153e771e6b84df3d0eb5651d',
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -106,37 +106,28 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  if (vehicles[ansIndex].name ==
-                                      vehicles[index].name) {
+                                  if (vehicles[ansIndex].name == vehicles[index].name) {
                                     setState(() {
-                                      audioCache.play('correct.wav');
+                                      player.play(AssetSource('correct.wav'));
                                       shuffleAndSetAnswer();
                                       score += 20;
                                     });
                                   } else {
-                                    audioCache.play('wrong.wav');
+                                    player.play(AssetSource('wrong.wav'));
                                   }
                                 },
                                 child: SizedBox(
                                     //color: Colors.black26,
-                                    height: MediaQuery.of(context).size.height /
-                                        6.7,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.8,
+                                    height: MediaQuery.of(context).size.height / 6.7,
+                                    width: MediaQuery.of(context).size.width / 2.8,
                                     child: Stack(children: [
                                       Image.asset(
                                         'assets/gui/vo.png',
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                                        width: MediaQuery.of(context).size.width,
                                         fit: BoxFit.fill,
                                       ),
                                       Center(
-                                        child: Text(vehicles[index].name,
-                                            style: const TextStyle(
-                                                fontFamily: 'Chicle',
-                                                letterSpacing: 3,
-                                                fontSize: 32,
-                                                fontWeight: FontWeight.bold)),
+                                        child: Text(vehicles[index].name, style: const TextStyle(fontFamily: 'Chicle', letterSpacing: 3, fontSize: 32, fontWeight: FontWeight.bold)),
                                       ),
                                     ])),
                               ),
@@ -171,21 +162,7 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 7,
                     child: Center(
-                      child: Text.rich(TextSpan(children: [
-                        TextSpan(
-                            text: 'Score :  ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 9)),
-                        TextSpan(
-                            text: '$score',
-                            style: TextStyle(
-                                color: Colors.teal,
-                                fontWeight: FontWeight.bold,
-                                fontSize:
-                                    MediaQuery.of(context).size.height / 7))
-                      ])),
+                      child: Text.rich(TextSpan(children: [TextSpan(text: 'Score :  ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: MediaQuery.of(context).size.height / 9)), TextSpan(text: '$score', style: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold, fontSize: MediaQuery.of(context).size.height / 7))])),
                     ),
                   ),
                 )
@@ -205,19 +182,11 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
         width: MediaQuery.of(context).size.width / 1.8,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: vehicles[ansIndex].name == 'Truck' ||
-                  vehicles[ansIndex].name == 'Helicopter' ||
-                  vehicles[ansIndex].name == 'Fire Truck' ||
-                  vehicles[ansIndex].name == 'Bus' ||
-                  vehicles[ansIndex].name == 'Ship' ||
-                  vehicles[ansIndex].name == 'Bike'
+          child: vehicles[ansIndex].name == 'Truck' || vehicles[ansIndex].name == 'Helicopter' || vehicles[ansIndex].name == 'Fire Truck' || vehicles[ansIndex].name == 'Bus' || vehicles[ansIndex].name == 'Ship' || vehicles[ansIndex].name == 'Bike'
               ? CachedNetworkImage(
-                  fit: vehicles[ansIndex].name == 'Bike'
-                      ? BoxFit.contain
-                      : BoxFit.fill,
+                  fit: vehicles[ansIndex].name == 'Bike' ? BoxFit.contain : BoxFit.fill,
                   imageUrl: vehicles[ansIndex].image,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      const SpinKitDualRing(color: Colors.amberAccent),
+                  progressIndicatorBuilder: (context, url, downloadProgress) => const SpinKitDualRing(color: Colors.amberAccent),
                   // CircularProgressIndicator(
                   //     value: downloadProgress.progress),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -237,8 +206,7 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: CachedNetworkImage(
-            imageUrl:
-                'https://img.freepik.com/free-vector/flat-comic-style-wallpaper_23-2148819714.jpg?w=996&t=st=1658942709~exp=1658943309~hmac=3db7cb703308e66d4bcca63e63823214d36e3575b9464bf5f2e168e46a452eb9',
+            imageUrl: 'https://img.freepik.com/free-vector/flat-comic-style-wallpaper_23-2148819714.jpg?w=996&t=st=1658942709~exp=1658943309~hmac=3db7cb703308e66d4bcca63e63823214d36e3575b9464bf5f2e168e46a452eb9',
             //'https://img.freepik.com/free-vector/hand-painted-watercolor-abstract-watercolor-background_23-2149005675.jpg?t=st=1658739695~exp=1658740295~hmac=edb7b47b3b46e3d6b49382738f7e700c96d6ef5814d67b230ecc0637b4e51fae&w=900',
             fit: BoxFit.fill,
           ),
@@ -255,12 +223,7 @@ class _VehicleGameState extends ResumableState<VehicleGame> {
                 height: 40,
                 //color: Colors.black12,
                 child: Center(
-                  child: Text('$score',
-                      style: TextStyle(
-                          fontFamily: 'Chicle',
-                          color: Colors.teal,
-                          fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.height / 13)),
+                  child: Text('$score', style: TextStyle(fontFamily: 'Chicle', color: Colors.teal, fontWeight: FontWeight.bold, fontSize: MediaQuery.of(context).size.height / 13)),
                 ),
               ),
             ),

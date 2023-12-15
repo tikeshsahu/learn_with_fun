@@ -46,7 +46,8 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
     ]);
   }
 
-  AudioCache audioCache = AudioCache();
+  // AudioCache audioCache = AudioCache();
+  final player = AudioPlayer();
   List<MatchGameModel> items2 = [];
   List<MatchGameModel> newlistitems = [];
   List<MatchGameModel> items = MatchGameModel.fruitsItems;
@@ -102,23 +103,7 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 6.5,
                           ),
-                          Text.rich(TextSpan(children: [
-                            TextSpan(
-                                text: 'Score :  ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            17)),
-                            TextSpan(
-                                text: '$score',
-                                style: TextStyle(
-                                    color: Colors.teal,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            15))
-                          ])),
+                          Text.rich(TextSpan(children: [TextSpan(text: 'Score :  ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: MediaQuery.of(context).size.height / 17)), TextSpan(text: '$score', style: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold, fontSize: MediaQuery.of(context).size.height / 15))])),
                         ],
                       ),
                     ),
@@ -133,10 +118,8 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                               child: Draggable<MatchGameModel>(
                                 data: item,
                                 childWhenDragging: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height / 7,
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.5,
+                                  height: MediaQuery.of(context).size.height / 7,
+                                  width: MediaQuery.of(context).size.width / 3.5,
                                   child: item.name == 'Grapes'
                                       ? CachedNetworkImage(
                                           imageUrl: item.image,
@@ -148,33 +131,25 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                                         ),
                                 ),
                                 feedback: SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height / 6.6,
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.4,
+                                  height: MediaQuery.of(context).size.height / 6.6,
+                                  width: MediaQuery.of(context).size.width / 3.4,
                                   child: item.name == 'Grapes'
                                       ? CachedNetworkImage(
                                           imageUrl: item.image,
                                           fit: BoxFit.fill,
                                         )
-                                      : Lottie.network(item.image,
-                                          fit: BoxFit.cover),
+                                      : Lottie.network(item.image, fit: BoxFit.cover),
                                 ),
                                 child: SizedBox(
                                   //color: Colors.amberAccent,
-                                  height:
-                                      MediaQuery.of(context).size.height / 6.5,
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.2,
+                                  height: MediaQuery.of(context).size.height / 6.5,
+                                  width: MediaQuery.of(context).size.width / 3.2,
                                   child: item.name == 'Grapes'
                                       ? CachedNetworkImage(
                                           imageUrl: item.image,
                                           fit: BoxFit.fill,
                                         )
-                                      : Lottie.network(item.image,
-                                          fit: item.name == 'Cat'
-                                              ? BoxFit.fill
-                                              : BoxFit.fill),
+                                      : Lottie.network(item.image, fit: item.name == 'Cat' ? BoxFit.fill : BoxFit.fill),
                                 ),
                               ),
                             );
@@ -190,7 +165,7 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                               return DragTarget<MatchGameModel>(
                                   onAccept: (receivedItem) {
                                     if (item.value == receivedItem.value) {
-                                      audioCache.play('correct.wav');
+                                      player.play(AssetSource('correct.wav'));
                                       //audioCache.play(item.music);
                                       setState(() {
                                         newlistitems.remove(receivedItem);
@@ -199,7 +174,7 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                                       score += 20;
                                       item.accepting = false;
                                     } else {
-                                      audioCache.play('wrong.wav');
+                                      player.play(AssetSource('wrong.wav'));
                                       setState(() {
                                         item.accepting = false;
                                       });
@@ -216,24 +191,11 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                                       item.accepting = false;
                                     });
                                   },
-                                  builder: (context, acceptedItems,
-                                          rejectedItems) =>
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            color: item.accepting
-                                                ? const Color.fromARGB(
-                                                    255, 199, 197, 197)
-                                                : const Color.fromARGB(
-                                                    255, 226, 223, 223)),
+                                  builder: (context, acceptedItems, rejectedItems) => Container(
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: item.accepting ? const Color.fromARGB(255, 199, 197, 197) : const Color.fromARGB(255, 226, 223, 223)),
                                         alignment: Alignment.center,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                8.8,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                3,
+                                        height: MediaQuery.of(context).size.height / 8.8,
+                                        width: MediaQuery.of(context).size.width / 3,
                                         margin: const EdgeInsets.all(24),
                                         child: Text(
                                           item.name,
@@ -277,12 +239,7 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                             height: 38,
                             //color: Colors.black26,
                             child: Center(
-                              child: Text('$score',
-                                  style: const TextStyle(
-                                      fontFamily: 'Chicle',
-                                      color: Colors.teal,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 34)),
+                              child: Text('$score', style: const TextStyle(fontFamily: 'Chicle', color: Colors.teal, fontWeight: FontWeight.bold, fontSize: 34)),
                             ),
                           ),
                         ),

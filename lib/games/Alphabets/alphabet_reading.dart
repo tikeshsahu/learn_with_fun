@@ -27,7 +27,7 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
-    audioCache.play("AA.mp3");
+    player.play(AssetSource("AA.mp3"));
   }
 
   @override
@@ -49,6 +49,7 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
   }
 
   AudioCache audioCache = AudioCache();
+  final player = AudioPlayer();
   bool loading = false;
 
   Future<bool> _onWillPop() async {
@@ -88,7 +89,7 @@ class _AlphabetsLearningState extends ResumableState<AlphabetsLearning> {
                 enableInfiniteScroll: false,
                 viewportFraction: 0.90,
                 onPageChanged: (index, reason) {
-                  audioCache.play(alphabets[index].pronounciation);
+                  player.play(AssetSource(alphabets[index].pronounciation));
                 },
                 autoPlayCurve: Curves.fastOutSlowIn),
             itemCount: alphabets.length,

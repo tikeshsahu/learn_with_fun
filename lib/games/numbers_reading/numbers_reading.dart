@@ -20,11 +20,12 @@ class _NumbersReadingState extends State<NumbersReading> {
   @override
   void initState() {
     super.initState();
-    audioCache.play(numbers[0].pronounciation);
+    player.play(AssetSource(numbers[0].pronounciation));
   }
 
   List<NumbersLearn> numbers = NumbersLearn.numbers;
-  AudioCache audioCache = AudioCache();
+  // AudioCache audioCache = AudioCache();
+  final player = AudioPlayer();
   CarouselController caro = CarouselController();
 
   Future<bool> _onWillPop() async {
@@ -69,7 +70,7 @@ class _NumbersReadingState extends State<NumbersReading> {
                 enableInfiniteScroll: false,
                 viewportFraction: 0.90,
                 onPageChanged: (index, reason) {
-                  audioCache.play(numbers[index].pronounciation);
+                  player.play(AssetSource(numbers[index].pronounciation));
                 },
                 autoPlayCurve: Curves.fastOutSlowIn),
             itemCount: numbers.length,

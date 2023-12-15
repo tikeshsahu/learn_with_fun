@@ -23,7 +23,7 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
   void initState() {
     super.initState();
     gaddi.shuffle();
-    audioCache.play(gaddi[0].audio);
+    player.play(AssetSource(gaddi[0].audio));
   }
 
   @override
@@ -44,6 +44,7 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
     ]);
   }
 
+  final player = AudioPlayer();
   List<Vehicles> gaddi = Vehicles.gaddi;
   CarouselController caro = CarouselController();
   AudioCache audioCache = AudioCache();
@@ -90,7 +91,7 @@ class _IdentifyVehiclesState extends ResumableState<IdentifyVehicles> {
                 enableInfiniteScroll: false,
                 viewportFraction: 0.90,
                 onPageChanged: (index, reason) {
-                  audioCache.play(gaddi[index].audio);
+                  player.play(AssetSource(gaddi[index].audio));
                 },
                 autoPlayCurve: Curves.fastOutSlowIn),
             itemCount: gaddi.length,

@@ -23,7 +23,7 @@ class _IdentifyProfessionState extends ResumableState<IdentifyProfession> {
   void initState() {
     super.initState();
     pros.shuffle();
-    audioCache.play(pros[0].pronounciation);
+    player.play(AssetSource(pros[0].pronounciation));
   }
 
   @override
@@ -46,6 +46,7 @@ class _IdentifyProfessionState extends ResumableState<IdentifyProfession> {
   }
 
   List<Professtions> pros = Professtions.pros;
+  final player = AudioPlayer();
 
   CarouselController caro = CarouselController();
   AudioCache audioCache = AudioCache();
@@ -97,8 +98,7 @@ class _IdentifyProfessionState extends ResumableState<IdentifyProfession> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: CachedNetworkImage(
-        imageUrl:
-            'https://img.freepik.com/premium-vector/suburban-landscape-view-high-rise-buildings-countryside-cartoon-vector-illustration_273525-462.jpg',
+        imageUrl: 'https://img.freepik.com/premium-vector/suburban-landscape-view-high-rise-buildings-countryside-cartoon-vector-illustration_273525-462.jpg',
         fit: BoxFit.fill,
       ),
     );
@@ -119,7 +119,7 @@ class _IdentifyProfessionState extends ResumableState<IdentifyProfession> {
                 enableInfiniteScroll: false,
                 viewportFraction: 0.90,
                 onPageChanged: (index, reason) {
-                  audioCache.play(pros[index].pronounciation);
+                  player.play(AssetSource(pros[index].pronounciation));
                 },
                 autoPlayCurve: Curves.fastOutSlowIn),
             itemCount: pros.length,
@@ -131,36 +131,21 @@ class _IdentifyProfessionState extends ResumableState<IdentifyProfession> {
                     height: MediaQuery.of(context).size.height / 1.6,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(26),
-                      child: pros[index].name == 'Farmer' ||
-                              pros[index].name == 'Astronaut' ||
-                              pros[index].name == 'Fire Fighter' ||
-                              pros[index].name == 'Scientist' ||
-                              pros[index].name == 'Pilot' ||
-                              pros[index].name == 'Soldier' ||
-                              pros[index].name == 'Police Man' ||
-                              pros[index].name == 'Teacher'
+                      child: pros[index].name == 'Farmer' || pros[index].name == 'Astronaut' || pros[index].name == 'Fire Fighter' || pros[index].name == 'Scientist' || pros[index].name == 'Pilot' || pros[index].name == 'Soldier' || pros[index].name == 'Police Man' || pros[index].name == 'Teacher'
                           ? CachedNetworkImage(
                               imageUrl: pros[index].image,
-                              fit: pros[index].name == 'Police Man'
-                                  ? BoxFit.contain
-                                  : BoxFit.fill,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      const SpinKitDualRing(
-                                          color: Colors.amberAccent),
+                              fit: pros[index].name == 'Police Man' ? BoxFit.contain : BoxFit.fill,
+                              progressIndicatorBuilder: (context, url, downloadProgress) => const SpinKitDualRing(color: Colors.amberAccent),
                               // CircularProgressIndicator(
                               //     value: downloadProgress.progress),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                              errorWidget: (context, url, error) => const Icon(Icons.error),
                             )
                           : Lottie.network(
                               pros[index].image,
                               fit: BoxFit.fill,
                             ),
                     ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(26),
-                        color: Colors.white
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(26), color: Colors.white
                         //Color(0xFFFFFFF0),
                         ),
                   ),

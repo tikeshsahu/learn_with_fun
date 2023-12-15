@@ -29,7 +29,7 @@ class _AnimalsState extends ResumableState<Animals> {
   void initState() {
     super.initState();
     items.shuffle();
-    audioCache.play(items[0].audio!);
+    player.play(AssetSource(items[0].audio!));
   }
 
   @override
@@ -59,9 +59,10 @@ class _AnimalsState extends ResumableState<Animals> {
   //   ]);
   // }
 
+  final player = AudioPlayer();
   List<MatchGameModel> items = MatchGameModel.animalsItems;
   CarouselController caro = CarouselController();
-  AudioCache audioCache = AudioCache();
+  // AudioCache audioCache = AudioCache();
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +134,7 @@ class _AnimalsState extends ResumableState<Animals> {
                 enableInfiniteScroll: false,
                 viewportFraction: 0.90,
                 onPageChanged: (index, reason) {
-                  audioCache.play(items[index].audio!);
+                  player.play(AssetSource(items[index].audio!));
                 },
                 autoPlayCurve: Curves.fastOutSlowIn),
             itemCount: items.length,
@@ -160,7 +161,7 @@ class _AnimalsState extends ResumableState<Animals> {
                             : Lottie.network(items[index].image, fit: items[index].name == 'Cat' ? BoxFit.contain : BoxFit.contain),
                       ),
                       onTap: () {
-                        audioCache.play(items[index].music!);
+                        player.play(AssetSource(items[index].music!));
                       },
                     ),
                     decoration: BoxDecoration(
