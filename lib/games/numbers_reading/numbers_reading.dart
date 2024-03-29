@@ -75,50 +75,55 @@ class _NumbersReadingState extends State<NumbersReading> {
                 autoPlayCurve: Curves.fastOutSlowIn),
             itemCount: numbers.length,
             itemBuilder: (BuildContext context, int index, int pageViewIndex) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      height: MediaQuery.of(context).size.height / 2.3,
-                      width: MediaQuery.of(context).size.width / 4.5,
-                      color: Colors.amber,
-                      child: Center(
-                        child: Text(
-                          numbers[index].num,
-                          textDirection: TextDirection.ltr,
-                          style: const TextStyle(
-                              fontSize: 130,
-                              letterSpacing: 2,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Freshman'),
-                        ),
-                      )),
-                  const Text(
-                    '-',
-                    style: TextStyle(
-                        fontFamily: 'Chicle',
-                        fontSize: 35,
-                        color: Colors.black87),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height / 1.4,
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: CachedNetworkImage(
-                        imageUrl: numbers[index].dialogImage,
-                        progressIndicatorBuilder: (context, url,
-                                downloadProgress) =>
-                            const SpinKitDualRing(color: Colors.amberAccent),
-                        // CircularProgressIndicator(
-                        //     value: downloadProgress.progress),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                        fit: BoxFit.fill),
-                    decoration: BoxDecoration(
-                      //color: Color(0xFFFFFFF0),
-                      borderRadius: BorderRadius.circular(28.0),
+              return GestureDetector(
+                onTap: () {
+                  player.play(AssetSource(numbers[index].pronounciation));
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        height: MediaQuery.of(context).size.height / 2.3,
+                        width: MediaQuery.of(context).size.width / 4.5,
+                        color: Colors.amber,
+                        child: Center(
+                          child: Text(
+                            numbers[index].num,
+                            textDirection: TextDirection.ltr,
+                            style: const TextStyle(
+                                fontSize: 130,
+                                letterSpacing: 2,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Freshman'),
+                          ),
+                        )),
+                    const Text(
+                      '-',
+                      style: TextStyle(
+                          fontFamily: 'Chicle',
+                          fontSize: 35,
+                          color: Colors.black87),
                     ),
-                  )
-                ],
+                    Container(
+                      height: MediaQuery.of(context).size.height / 1.4,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      child: CachedNetworkImage(
+                          imageUrl: numbers[index].dialogImage,
+                          progressIndicatorBuilder: (context, url,
+                                  downloadProgress) =>
+                              const SpinKitDualRing(color: Colors.amberAccent),
+                          // CircularProgressIndicator(
+                          //     value: downloadProgress.progress),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          fit: BoxFit.fill),
+                      decoration: BoxDecoration(
+                        //color: Color(0xFFFFFFF0),
+                        borderRadius: BorderRadius.circular(28.0),
+                      ),
+                    )
+                  ],
+                ),
               );
             }),
       ),

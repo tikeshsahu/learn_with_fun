@@ -2,7 +2,7 @@
     package="com.learn_with_fun">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="com.learn_with_fun"
+        android:label="Learn With Fun"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

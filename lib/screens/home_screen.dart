@@ -49,20 +49,25 @@ class _HomeState extends ResumableState<Home> {
           SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child: CachedNetworkImage(
-                imageUrl:
-                    //'https://i.pinimg.com/originals/c4/b5/07/c4b5076a2a215e0b6d341a3f399ccf99.jpg',
-                    'https://img.freepik.com/free-vector/color-seamless-space-pattern_102902-2360.jpg?t=st=1658496795~exp=1658497395~hmac=575a76b85673b0c448f5332643faa5b7904b99835c4d0683e09bce54db8d8f4f&w=996',
-                fit: BoxFit.fill,
-              )),
+              child: 
+              // CachedNetworkImage(
+              //   imageUrl:
+              //       //'https://i.pinimg.com/originals/c4/b5/07/c4b5076a2a215e0b6d341a3f399ccf99.jpg',
+              //       'https://img.freepik.com/free-vector/color-seamless-space-pattern_102902-2360.jpg?t=st=1658496795~exp=1658497395~hmac=575a76b85673b0c448f5332643faa5b7904b99835c4d0683e09bce54db8d8f4f&w=996',
+              //   fit: BoxFit.fill,
+              // )
+              Image.asset(
+                'assets/home_bg.png',
+                fit: BoxFit.fill,)
+              ),
           Column(
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height / 8.5,
                 width: MediaQuery.of(context).size.width,
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [],
+                  children: [],
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height / 18),

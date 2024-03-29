@@ -13,41 +13,49 @@ class MatchGameModel {
       value: 'banana',
       name: 'Banana',
       image: 'https://assets8.lottiefiles.com/packages/lf20_kyusfkfp.json',
+      audio: "banana.wav",
     ),
     // MatchGameModel(
     //   value: 'orange',
     //   name: 'Orange',
     //   image: 'https://assets9.lottiefiles.com/packages/lf20_pfsppq45.json',
+    //   audio: "orange.wav",
     // ),
     MatchGameModel(
       value: 'pears',
       name: 'Pears',
       image: 'https://assets9.lottiefiles.com/packages/lf20_opljg7yp.json',
+      audio: "pears.wav",
     ),
     // MatchGameModel(
     //   value: 'pineapple',
     //   name: 'Pineapple',
     //   image: 'https://assets8.lottiefiles.com/packages/lf20_etiq0fbs.json',
+    //   audio: "pineapple.wav",
     // ),
     MatchGameModel(
       value: 'mango',
       name: 'Mango',
       image: 'https://assets8.lottiefiles.com/packages/lf20_sas45b58.json',
+      audio: "mango.wav",
     ),
     MatchGameModel(
       value: 'Watermelon',
       name: 'Watermelon',
       image: 'https://assets8.lottiefiles.com/packages/lf20_n2nxpuho.json',
+      audio: "watermelon.wav",
     ),
     MatchGameModel(
       value: 'grapes',
       name: 'Grapes',
       image: 'https://media.baamboozle.com/uploads/images/117411/1619424207_176960_url.gif',
+      audio: "grapes.wav",
     ),
     MatchGameModel(
       value: 'carrot',
       name: 'Carrot',
       image: 'https://assets7.lottiefiles.com/packages/lf20_y3pev23v.json',
+      audio: "carrot.wav",
     ),
   ];
 

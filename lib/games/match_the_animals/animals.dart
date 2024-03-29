@@ -184,7 +184,7 @@ class _AnimalsState extends ResumableState<Animals> {
                             fontFamily: 'party',
                             letterSpacing: 2,
                             color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.height / 10.5,
+                            fontSize: MediaQuery.of(context).size.height / 11.5,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

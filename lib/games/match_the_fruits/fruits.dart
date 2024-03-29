@@ -28,7 +28,7 @@ class _FruitsState extends ResumableState<Fruits> {
   void initState() {
     super.initState();
     items.shuffle();
-    //audioCache.play(items[0].audio!);
+    audioPlayer.play(AssetSource(items[0].audio!));
   }
 
   @override
@@ -47,9 +47,10 @@ class _FruitsState extends ResumableState<Fruits> {
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
-    // audioPlayer.resume();
+    audioPlayer.resume();
   }
 
+  final audioPlayer = AudioPlayer();
   List<MatchGameModel> items = MatchGameModel.fruitsItems;
   CarouselController caro = CarouselController();
   AudioCache audioCache = AudioCache();
@@ -122,7 +123,7 @@ class _FruitsState extends ResumableState<Fruits> {
                 enableInfiniteScroll: false,
                 viewportFraction: 0.90,
                 onPageChanged: (index, reason) {
-                  //audioCache.play(items[index].audio!);
+                  audioPlayer.play(AssetSource(items[index].audio!));
                 },
                 autoPlayCurve: Curves.fastOutSlowIn),
             itemCount: items.length,
@@ -142,8 +143,6 @@ class _FruitsState extends ResumableState<Fruits> {
                                 fit: BoxFit.contain,
                                 imageUrl: items[index].image,
                                 progressIndicatorBuilder: (context, url, downloadProgress) => const SpinKitDualRing(color: Colors.amberAccent),
-                                // CircularProgressIndicator(
-                                //     value: downloadProgress.progress),
                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                               )
                             : Lottie.network(items[index].image, fit: BoxFit.contain),
@@ -165,7 +164,7 @@ class _FruitsState extends ResumableState<Fruits> {
                             fontFamily: 'party',
                             letterSpacing: 2,
                             color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.height / 10.5,
+                            fontSize: MediaQuery.of(context).size.height / 11.5,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

@@ -8,13 +8,21 @@ class NetworkController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    super.onInit();
   }
 
-  void _updateConnectionStatus(ConnectivityResult connectivityResult) {
+  _updateConnectionStatus(ConnectivityResult connectivityResult) {
     if (connectivityResult == ConnectivityResult.none) {
-      Get.dialog(const NoInternetDialog(), barrierDismissible: false);
+      Get.dialog(const NoInternetDialog(), barrierDismissible: false).whenComplete(() {
+        if (connectivityResult == ConnectivityResult.none) {
+          Get.dialog(const NoInternetDialog(), barrierDismissible: false);
+        } else {
+          if (Get.isDialogOpen!) {
+            Navigator.of(Get.context!).pop();
+          }
+        }
+      });
     } else {
       if (Get.isDialogOpen!) {
         Navigator.of(Get.context!).pop();

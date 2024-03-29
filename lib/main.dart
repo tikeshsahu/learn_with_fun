@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
             MatchGame.routeName: (ctx) => const MatchGame(),
             FruitsMatchGame.routeName: (ctx) => const FruitsMatchGame(),
             NumbersReading.routeName: (ctx) => const NumbersReading(),
-            StartPage.routeName: (ctx) => const StartPage(),
+            // StartPage.routeName: (ctx) => const StartPage(),
             // AlphabetsWriting.routeName: (ctx) => AlphabetsWriting(),
             // AnimalPuzzle.routeName: (ctx) => AnimalPuzzle(),
             // CountingGame.routeName: (ctx) => CountingGame(),
