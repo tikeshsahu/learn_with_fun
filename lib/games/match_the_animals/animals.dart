@@ -151,8 +151,7 @@ class _AnimalsState extends ResumableState<Animals> {
                                 fit: BoxFit.contain,
                                 imageUrl: items[index].image,
                                 progressIndicatorBuilder: (context, url, downloadProgress) => const SpinKitDualRing(color: Colors.amberAccent),
-                                // CircularProgressIndicator(
-                                //     value: downloadProgress.progress),
+                                
                                 errorWidget: (context, url, error) => const Icon(
                                   Icons.error,
                                   size: 35,

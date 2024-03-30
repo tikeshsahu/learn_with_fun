@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learn_with_fun/dependency_injection.dart';
-import 'package:learn_with_fun/screens/splash_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'games/Alphabets/alphabet_reading.dart';
 import 'games/Identify/identify_profession.dart';
@@ -16,7 +14,7 @@ import 'games/match_the_animals/animal_match_game.dart';
 import 'games/match_the_fruits/fruits.dart';
 import 'games/match_the_fruits/fruits_match_game.dart';
 import 'games/numbers_reading/numbers_reading.dart';
-import 'screens/home_screen.dart';
+import 'home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

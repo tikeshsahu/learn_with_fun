@@ -1,85 +1,18 @@
 import 'dart:ui';
-import 'package:audioplayers/audioplayers.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:learn_with_fun/class/home_tile_class.dart';
 import 'package:lottie/lottie.dart';
-import 'package:need_resume/need_resume.dart';
 
-class Home extends StatefulWidget {
-  static const routename = 'home';
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends ResumableState<Home> {
-
-  @override
-  void onReady() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      // DeviceOrientation.landscapeLeft,
-    ]);
-  }
-
-  @override
-  void onResume() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      // DeviceOrientation.landscapeLeft,
-    ]);
-    // audioPlayer.resume();
-  }
-
-  AudioCache audioCache = AudioCache();
-  AudioPlayer audioPlayer = AudioPlayer();
-  List<HomeTile> games = HomeTile.homeTiles;
+class HomeScreenSlider extends StatelessWidget {
+  const HomeScreenSlider({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(children: [
-          SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: 
-              // CachedNetworkImage(
-              //   imageUrl:
-              //       //'https://i.pinimg.com/originals/c4/b5/07/c4b5076a2a215e0b6d341a3f399ccf99.jpg',
-              //       'https://img.freepik.com/free-vector/color-seamless-space-pattern_102902-2360.jpg?t=st=1658496795~exp=1658497395~hmac=575a76b85673b0c448f5332643faa5b7904b99835c4d0683e09bce54db8d8f4f&w=996',
-              //   fit: BoxFit.fill,
-              // )
-              Image.asset(
-                'assets/home_bg.png',
-                fit: BoxFit.fill,)
-              ),
-          Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 8.5,
-                width: MediaQuery.of(context).size.width,
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [],
-                ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height / 18),
-              slider(context),
-            ],
-          ),
-        ]),
-      ),
-    );
-  }
-
-  SizedBox slider(BuildContext context) {
+    List<HomeTile> games = HomeTile.homeTiles;
+    
     return SizedBox(
         height: MediaQuery.of(context).size.height / 1.3,
         width: MediaQuery.of(context).size.width,
@@ -105,13 +38,12 @@ class _HomeState extends ResumableState<Home> {
                           games[itemIndex].name == 'Numbers' ||
                           games[itemIndex].name == 'Vehicles' ||
                           games[itemIndex].name == 'Professions') {
-                        pushNamed(context, games[itemIndex].path);
+                        Navigator.pushNamed(context, games[itemIndex].path);
                       } else {
                         () {};
                       }
                     },
 
-                    ///mnm
                     child: Column(
                       children: [
                         Flexible(
@@ -155,7 +87,6 @@ class _HomeState extends ResumableState<Home> {
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 7.5,
                           width: MediaQuery.of(context).size.width,
-                          //color: Colors.amber,
                           child: Center(
                             child: Text(
                               games[itemIndex].name,
@@ -174,5 +105,6 @@ class _HomeState extends ResumableState<Home> {
                 }),
           ],
         ));
+ 
   }
 }

@@ -116,133 +116,107 @@ class _MatchGameState extends ResumableState<MatchGame> {
                         children: [
                           const Spacer(flex: 2),
                           SizedBox(
-                              height: MediaQuery.of(context).size.height / 1.15,
-                              child: Column(
-                                children: newlistitems.map((item) {
-                                  return Container(
-                                                                        margin: const EdgeInsets.all(6),
-                                    child: Draggable<MatchGameModel>(
-                                      data: item,
-                                      childWhenDragging: SizedBox(
-                                        height:
-                                          MediaQuery.of(context).size.height /
-                                              7,
-                                        width: MediaQuery.of(context).size.width /
-                                          3.5,
-                                        child: item.name == 'Cow'
-                                            ? CachedNetworkImage(
-                                                imageUrl: item.image,
-                                                fit: BoxFit.fill,
-                                              )
-                                            : Lottie.network(
-                                                item.image,
-                                                fit: BoxFit.cover,
-                                              ),
-                                        // Lottie.network(
-                                        //   item.image,
-                                        //   fit: BoxFit.cover,
-                                        // ),
-                                      ),
-                                      feedback: Container(
-                                        height:
-                                          MediaQuery.of(context).size.height /
-                                              6.6,
-                                        width: MediaQuery.of(context).size.width /
-                                          3.4,
-                                        child: item.name == 'Cow'
-                                            ? CachedNetworkImage(
-                                                imageUrl: item.image,
-                                                fit: BoxFit.fill,
-                                              )
-                                            : Lottie.network(item.image,
-                                              fit: BoxFit.cover),
-                                      ),
-                                      child: SizedBox(
-                                        height:
-                                          MediaQuery.of(context).size.height /
-                                              6.3,
-                                        width: MediaQuery.of(context).size.width /
-                                          2.8,
-                                        child: item.name == 'Cow'
-                                            ? CachedNetworkImage(
-                                                imageUrl: item.image,
-                                                fit: BoxFit.fill,
-                                              )
-                                            : Lottie.network(item.image,
-                                              fit: BoxFit.fill),
-                                      ),
+                            height: MediaQuery.of(context).size.height / 1.15,
+                            child: Column(
+                              children: newlistitems.map((item) {
+                                return Container(
+                                  margin: const EdgeInsets.all(6),
+                                  child: Draggable<MatchGameModel>(
+                                    data: item,
+                                    childWhenDragging: SizedBox(
+                                      height: MediaQuery.of(context).size.height / 7,
+                                      width: MediaQuery.of(context).size.width / 3.5,
+                                      child: item.name == 'Cow'
+                                          ? CachedNetworkImage(
+                                              imageUrl: item.image,
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Lottie.network(
+                                              item.image,
+                                              fit: BoxFit.cover,
+                                            ),
+                                      // Lottie.network(
+                                      //   item.image,
+                                      //   fit: BoxFit.cover,
+                                      // ),
                                     ),
-                                  );
-                                }).toList(),
-                              ),
+                                    feedback: Container(
+                                      height: MediaQuery.of(context).size.height / 6.6,
+                                      width: MediaQuery.of(context).size.width / 3.4,
+                                      child: item.name == 'Cow'
+                                          ? CachedNetworkImage(
+                                              imageUrl: item.image,
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Lottie.network(item.image, fit: BoxFit.cover),
+                                    ),
+                                    child: SizedBox(
+                                      height: MediaQuery.of(context).size.height / 6.3,
+                                      width: MediaQuery.of(context).size.width / 2.8,
+                                      child: item.name == 'Cow'
+                                          ? CachedNetworkImage(
+                                              imageUrl: item.image,
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Lottie.network(item.image, fit: BoxFit.fill),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
                             ),
+                          ),
                           const Spacer(
-                          flex: 3,
+                            flex: 3,
                           ),
                           SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              child: Column(
-                                children: items2.map((item) {
-                                  return DragTarget<MatchGameModel>(
-                                      onAccept: (receivedItem) {
-                                        if (item.value == receivedItem.value) {
-                                          player.play(AssetSource('correct.wav'));
-                                          // audioCache.play(item.music);
-                                          setState(() {
-                                            newlistitems.remove(receivedItem);
-                                            items2.remove(item);
-                                          });
-                                          score += 20;
-                                          item.accepting = false;
-                                        } else {
-                                          player.play(AssetSource('wrong.wav'));
-                                          setState(() {
-                                            item.accepting = false;
-                                          });
-                                        }
-                                      },
-                                      onWillAccept: (receivedItem) {
+                            height: MediaQuery.of(context).size.height,
+                            child: Column(
+                              children: items2.map((item) {
+                                return DragTarget<MatchGameModel>(
+                                    onAccept: (receivedItem) {
+                                      if (item.value == receivedItem.value) {
+                                        player.play(AssetSource('correct.wav'));
+                                        // audioCache.play(item.music);
                                         setState(() {
-                                          item.accepting = true;
+                                          newlistitems.remove(receivedItem);
+                                          items2.remove(item);
                                         });
-                                        return true;
-                                      },
-                                      onLeave: (receivedItem) {
+                                        score += 20;
+                                        item.accepting = false;
+                                      } else {
+                                        player.play(AssetSource('wrong.wav'));
                                         setState(() {
                                           item.accepting = false;
                                         });
-                                      },
-                                      builder: (context, acceptedItems,
-                                            rejectedItems) =>
-                                        Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: item.accepting
-                                                  ? const Color.fromARGB(
-                                                      255, 199, 197, 197)
-                                                  : const Color.fromARGB(
-                                                      255, 226, 223, 223)),
-                                            alignment: Alignment.center,
-                                            height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              8.5,
-                                            width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              3,
-                                            margin: const EdgeInsets.all(22),
-                                            child: Text(
-                                              item.name,
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 24,
-                                              ),
+                                      }
+                                    },
+                                    onWillAccept: (receivedItem) {
+                                      setState(() {
+                                        item.accepting = true;
+                                      });
+                                      return true;
+                                    },
+                                    onLeave: (receivedItem) {
+                                      setState(() {
+                                        item.accepting = false;
+                                      });
+                                    },
+                                    builder: (context, acceptedItems, rejectedItems) => Container(
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: item.accepting ? const Color.fromARGB(255, 199, 197, 197) : const Color.fromARGB(255, 226, 223, 223)),
+                                          alignment: Alignment.center,
+                                          height: MediaQuery.of(context).size.height / 8.5,
+                                          width: MediaQuery.of(context).size.width / 3,
+                                          margin: const EdgeInsets.all(22),
+                                          child: Text(
+                                            item.name,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 24,
                                             ),
-                                          ));
-                                }).toList(),
-                                                          ),
+                                          ),
+                                        ));
+                              }).toList(),
+                            ),
                           ),
                         ],
                       ),
@@ -260,8 +234,7 @@ class _MatchGameState extends ResumableState<MatchGame> {
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
                       child: CachedNetworkImage(
-                        imageUrl:
-                            'https://img.freepik.com/free-vector/beautiful-comic-pop-art-colorful-book-design-vector_1035-14033.jpg?w=740&t=st=1658942128~exp=1658942728~hmac=3ca21f06aa046d55cc27883525a70d558a359826a066b1f5e543a4aec699bb03',
+                        imageUrl: 'https://img.freepik.com/free-vector/beautiful-comic-pop-art-colorful-book-design-vector_1035-14033.jpg?w=740&t=st=1658942128~exp=1658942728~hmac=3ca21f06aa046d55cc27883525a70d558a359826a066b1f5e543a4aec699bb03',
                         //'https://img.freepik.com/premium-vector/little-animals-forest_43633-4000.jpg?w=360',
                         fit: BoxFit.fill,
                       ),
@@ -301,12 +274,7 @@ class _MatchGameState extends ResumableState<MatchGame> {
                         height: 38,
                         //color: Colors.black26,
                         child: Center(
-                          child: Text('$score',
-                              style: const TextStyle(
-                                  fontFamily: 'Chicle',
-                                  color: Colors.teal,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 34)),
+                          child: Text('$score', style: const TextStyle(fontFamily: 'Chicle', color: Colors.teal, fontWeight: FontWeight.bold, fontSize: 34)),
                         ),
                       ),
                     ),
