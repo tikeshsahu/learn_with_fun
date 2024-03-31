@@ -2,7 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:learn_with_fun/games/match_the_animals/itemModel.dart';
+import 'package:learn_with_fun/class/itemModel.dart';
 import 'package:lottie/lottie.dart';
 import 'package:need_resume/need_resume.dart';
 
@@ -135,12 +135,8 @@ class _MatchGameState extends ResumableState<MatchGame> {
                                               item.image,
                                               fit: BoxFit.cover,
                                             ),
-                                      // Lottie.network(
-                                      //   item.image,
-                                      //   fit: BoxFit.cover,
-                                      // ),
                                     ),
-                                    feedback: Container(
+                                    feedback: SizedBox(
                                       height: MediaQuery.of(context).size.height / 6.6,
                                       width: MediaQuery.of(context).size.width / 3.4,
                                       child: item.name == 'Cow'
@@ -255,7 +251,6 @@ class _MatchGameState extends ResumableState<MatchGame> {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.popAndPushNamed(context, 'home');
-                          //pushNamed(context, 'home');
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -269,7 +264,7 @@ class _MatchGameState extends ResumableState<MatchGame> {
                     ),
                     Align(
                       alignment: const AlignmentDirectional(0.04, 0.33),
-                      child: Container(
+                      child: SizedBox(
                         width: 126,
                         height: 38,
                         //color: Colors.black26,

@@ -2,7 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:learn_with_fun/games/match_the_animals/itemModel.dart';
+import 'package:learn_with_fun/class/itemModel.dart';
 import 'package:lottie/lottie.dart';
 import 'package:need_resume/need_resume.dart';
 
@@ -113,11 +113,10 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                         Column(
                           children: newlistitems.map((item) {
                             return Container(
-                              // color: Colors.amber,
                               margin: const EdgeInsets.all(6),
                               child: Draggable<MatchGameModel>(
                                 data: item,
-                                childWhenDragging: Container(
+                                childWhenDragging: SizedBox(
                                   height: MediaQuery.of(context).size.height / 7,
                                   width: MediaQuery.of(context).size.width / 3.5,
                                   child: item.name == 'Grapes'
@@ -141,7 +140,6 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                                       : Lottie.network(item.image, fit: BoxFit.cover),
                                 ),
                                 child: SizedBox(
-                                  //color: Colors.amberAccent,
                                   height: MediaQuery.of(context).size.height / 6.5,
                                   width: MediaQuery.of(context).size.width / 3.2,
                                   child: item.name == 'Grapes'
@@ -159,7 +157,6 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                           flex: 3,
                         ),
                         SizedBox(
-                          //color: Colors.amber,
                           child: Column(
                             children: items2.map((item) {
                               return DragTarget<MatchGameModel>(
@@ -234,10 +231,9 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                         homeButton(context),
                         Align(
                           alignment: const AlignmentDirectional(0.04, 0.33),
-                          child: Container(
+                          child: SizedBox(
                             width: 126,
                             height: 38,
-                            //color: Colors.black26,
                             child: Center(
                               child: Text('$score', style: const TextStyle(fontFamily: 'Chicle', color: Colors.teal, fontWeight: FontWeight.bold, fontSize: 34)),
                             ),
@@ -249,10 +245,9 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
                             onTap: () {
                               replay();
                             },
-                            child: Container(
+                            child: const SizedBox(
                               width: 80,
                               height: 110,
-                              //color: Colors.black26,
                             ),
                           ),
                         ),
@@ -266,7 +261,7 @@ class _FruitsMatchGameState extends ResumableState<FruitsMatchGame> {
   Align gameCompletedBox(BuildContext context) {
     return Align(
       alignment: const AlignmentDirectional(0, 0.2),
-      child: Container(
+      child: SizedBox(
         //color: Colors.black12,
         width: MediaQuery.of(context).size.width / 1.2,
         height: MediaQuery.of(context).size.height / 1.2,

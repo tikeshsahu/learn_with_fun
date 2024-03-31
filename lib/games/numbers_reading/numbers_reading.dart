@@ -1,8 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart' hide BoxShadow;
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:learn_with_fun/class/numbers_class.dart';
 import 'package:learn_with_fun/games/numbers_reading/widgets/numbers_slider.dart';
 import 'package:learn_with_fun/widgets/background_image.dart';
